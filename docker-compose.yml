@@ -1,0 +1,11 @@
+version: "3.7"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: time-tracker
+    ports:
+      - 9090:8080
+    volumes:
+      - ./:/var/www
