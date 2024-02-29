@@ -1,14 +1,14 @@
 <template>
-  <TimeTracker />
+  <Dashboard />
 </template>
 
 <script lang="ts">
-import TimeTracker from './pages/TimeTracker.vue'
+import Dashboard from './pages/Dashboard.vue'
 
 export default {
   name: 'App',
   components: {
-    TimeTracker
+    Dashboard
   }
 }
 </script>

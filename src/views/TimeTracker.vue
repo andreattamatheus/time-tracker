@@ -1,24 +1,16 @@
 <template>
-    <main class="columns is-gapless is-multiline">
-        <div class="column is-one-quarter">
-            <SideBar />
-        </div>
-        <div class="column is-three-quarter">
-            <FormComponent @onAddTaskToList="addTaskToList" />
-            <div class="lista">
-                <TaskItem v-for="(task, index) in tasks" :task="task" :key="index" />
-                <BoxComponent v-if="emptyList">
-                    No tasks to show
-                </BoxComponent>
-            </div>
-        </div>
-    </main>
+    <FormComponent @onAddTaskToList="addTaskToList" />
+    <div class="lista">
+        <TaskItem v-for="(task, index) in tasks" :task="task" :key="index" />
+        <BoxComponent v-if="emptyList">
+            No tasks to show
+        </BoxComponent>
+    </div>
 </template>
   
 <script lang="ts">
 
 import { defineComponent } from 'vue';
-import SideBar from '../components/SideBar.vue'
 import FormComponent from '../components/FormComponent.vue'
 import TaskItem from '../components/TaskItem.vue'
 import TaskInterface from '../interfaces/TaskInterface'
@@ -27,7 +19,6 @@ import BoxComponent from '../components/BoxComponent.vue'
 export default defineComponent({
     name: 'TimeTracker',
     components: {
-        SideBar,
         FormComponent,
         TaskItem,
         BoxComponent
@@ -48,7 +39,6 @@ export default defineComponent({
 
         }
     }
-
 });
 </script>
   
