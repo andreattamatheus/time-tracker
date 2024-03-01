@@ -1,11 +1,14 @@
 <template>
-    <FormComponent @onAddTaskToList="addTaskToList" />
-    <div class="lista">
-        <TaskItem v-for="(task, index) in tasks" :task="task" :key="index" />
-        <BoxComponent v-if="emptyList">
-            No tasks to show
-        </BoxComponent>
-    </div>
+    <section class="projects">
+        <h1 class="title">Time Tracker</h1>
+        <FormComponent @onAddTaskToList="addTaskToList" />
+        <div class="list">
+            <TaskItem v-for="(task, index) in tasks" :task="task" :key="index" />
+            <BoxComponent v-if="emptyList">
+                No tasks to show
+            </BoxComponent>
+        </div>
+    </section>
 </template>
   
 <script lang="ts">
@@ -43,7 +46,12 @@ export default defineComponent({
 </script>
   
 <style>
-.lista {
+.projects {
+    padding: 1.25rem;
+}
+
+
+.list {
     padding: 1.25rem;
 }
 
