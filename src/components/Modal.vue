@@ -3,15 +3,14 @@
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
-                <p class="modal-card-title">Modal title</p>
+                <slot name="header" />
                 <button class="delete" aria-label="close"></button>
             </header>
             <form>
                 <section class="modal-card-body">
-                    <div class="field">
-                        <label for="description" class="label">Edit task</label>
-                        <input type="text" class="input" v-model="taskDescription" id="description" />
-                    </div>
+                    <slot name="section" />
+                    <input type="text" class="input" v-model="taskDescription" id="description" />
+
                 </section>
                 <footer class="modal-card-foot">
                     <button @click="saveTask" class="button is-success">Save changes</button>

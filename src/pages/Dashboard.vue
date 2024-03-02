@@ -13,11 +13,22 @@
 
 import { defineComponent } from 'vue';
 import SideBar from '../components/SideBar.vue'
+import { useStore } from '@/store';
 
 export default defineComponent({
     name: 'TimeTracker',
     components: {
         SideBar,
+    },
+    setup() {
+        const store = useStore();
+        return {
+            store
+        }
+    },
+    mounted() {
+        this.store.dispatch('fetchTasks')
+        this.store.dispatch('fetchProjects');
     },
 
 });

@@ -9,7 +9,16 @@
             </BoxComponent>
         </div>
         <Modal v-if="taskSelected" @saveTask="saveTask" @closeModal="closeModal" :taskSelected="taskSelected"
-            :openModal="openModal" />
+            :openModal="openModal">
+            <template v-slot:header>
+                <p class="modal-card-title">Edit task</p>
+            </template>
+            <template v-slot:section>
+                <div class="field">
+                    <label for="description" class="label">Description</label>
+                </div>
+            </template>
+        </Modal>
     </section>
 </template>
   
@@ -43,10 +52,6 @@ export default defineComponent({
             openModal: false,
             taskSelected: {} as TaskInterface
         }
-    },
-    mounted() {
-        this.store.dispatch('fetchTasks')
-        this.store.dispatch('fetchProjects');
     },
     methods: {
         addTaskToList(task: TaskInterface) {
