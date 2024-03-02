@@ -8,6 +8,9 @@ export interface StateTask {
 }
 
 export const task: Module<StateTask, State> = {
+  state: {
+    tasks: [],
+  },
   mutations: {
     addTask(state, task: TaskInterface) {
       state.tasks.push(task);

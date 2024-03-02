@@ -31,7 +31,7 @@ import TaskInterface from "../../interfaces/TaskInterface";
 
 export default defineComponent({
     name: 'TaskItem',
-    emits: ['editTask'],
+    emits: ['editTask', 'deleteTask'],
     components: {
         BoxComponent,
         StopWatch
@@ -44,7 +44,7 @@ export default defineComponent({
     },
     methods: {
         deleteTask(id: string) {
-            console.log('delete task', id)
+            this.$emit('deleteTask', id)
         },
         editTask(task: TaskInterface) {
             this.$emit('editTask', task)

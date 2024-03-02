@@ -6,6 +6,7 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -13,7 +14,8 @@
                 <td>{{ project.id }}</td>
                 <td>{{ project.name }}</td>
                 <td>
-                    <router-link :to="`projects/${project.id}/edit`" class="button is-small is-primary">Edit</router-link>
+                    <router-link :to="`projects/${project.id}/edit`"
+                        class="button is-small is-primary mr-1">Edit</router-link>
                     <button @click="deleteProject(project.id)" class="button is-small is-danger">Delete</button>
                 </td>
             </tr>
@@ -29,14 +31,15 @@ export default defineComponent({
     name: "List",
     setup() {
         const store = useStore();
+
+        const deleteProject = (projectID: string) => {
+            store.dispatch('deleteProject', projectID);
+        }
+
         return {
             store,
-            projects: computed(() => store.state.project.projects)
-        }
-    },
-    methods: {
-        deleteProject(projectID: string) {
-            this.store.dispatch('deleteProject', projectID);
+            projects: computed(() => store.state.project.projects),
+            deleteProject
         }
     }
 });

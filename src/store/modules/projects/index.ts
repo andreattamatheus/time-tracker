@@ -37,7 +37,6 @@ export const project: Module<StateProject, State> = {
     },
     async addProject({ commit }, projectName: string) {
       const response = await axios.post("/projects", { name: projectName });
-      console.log(response.data);
       commit("addProject", response.data);
     },
     async updateProject({ commit }, project: ProjectInterface) {
@@ -45,6 +44,11 @@ export const project: Module<StateProject, State> = {
         name: project.name,
       });
       commit("updateProject", response.data);
+    },
+  },
+  getters: {
+    projects(state) {
+      return state.projects;
     },
   },
 };

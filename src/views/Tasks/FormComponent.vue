@@ -22,12 +22,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed, ref } from "vue";
 import TimerComponent from "./TimerComponent.vue";
 import { useStore } from "vuex";
-
 import { key } from "@/store";
-
 
 export default defineComponent({
   name: "FormComponent",
@@ -35,32 +33,32 @@ export default defineComponent({
   components: {
     TimerComponent,
   },
-  setup() {
+  setup(props, { emit }) {
     const store = useStore(key);
+    const taskDescription = ref('')
+    const idProject = ref('')
+    const projects = computed(() => store.state.project.projects)
+
+    const finishTask = (timePassed: number): void => {
+      emit('onAddTaskToList', {
+        description: taskDescription.value,
+        durationInSeconds: timePassed,
+        project: projects.value.find(proj => proj.id == idProject.value)
+      })
+      taskDescription.value = ''
+    }
+
     return {
       store,
-      projects: computed(() => store.state.project.projects)
-    }
-  },
-  data() {
-    return {
-      taskDescription: '',
-      idProject: ''
+      projects,
+      taskDescription,
+      idProject,
+      finishTask
     }
   },
   mounted() {
     this.store.dispatch('fetchProjects');
   },
-  methods: {
-    finishTask(timePassed: number): void {
-      this.$emit('onAddTaskToList', {
-        description: this.taskDescription,
-        durationInSeconds: timePassed,
-        project: this.projects.find((project) => project.id === this.idProject)
-      })
-      this.taskDescription = ''
-    },
-  }
 });
 </script>
 

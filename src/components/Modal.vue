@@ -53,8 +53,6 @@ export default defineComponent({
     },
     methods: {
         closeModal() {
-            console.log('close')
-            console.log(this.taskSelected)
             this.$emit('closeModal')
         },
         saveTask() {

@@ -11,18 +11,13 @@
 </template>
   
 <script lang="ts">
-import { computed, defineComponent } from "vue";
-import { useStore } from '@/store';
+import { computed, defineComponent, ref } from "vue";
+import { useStore } from "vuex";
+import { key } from '@/store';
+import { useRouter } from "vue-router";
 
 export default defineComponent({
     name: "Form",
-    setup() {
-        const store = useStore();
-        return {
-            store,
-            projects: computed(() => store.state.project.projects)
-        }
-    },
     props: {
         id: {
             type: String,
@@ -30,32 +25,36 @@ export default defineComponent({
             default: ""
         }
     },
-    data() {
-        return {
-            projectName: ""
-        };
-    },
-    mounted() {
-        if (this.id) {
-            const project = this.projects.find(project => project.id === this.id)
+    setup(props) {
+        const store = useStore(key);
+        const router = useRouter()
+        const projectName = ref('')
+
+        if (props.id) {
+            const project = store.state.project.projects.find(project => project.id === props.id)
             if (project) {
-                this.projectName = project.name
+                projectName.value = project?.name || ''
             }
+        }
+
+        const saveProject = () => {
+            if (props.id) {
+                store.dispatch('updateProject', { id: props.id, name: projectName.value })
+            } else {
+                store.dispatch("addProject", projectName.value);
+            }
+            projectName.value = "";
+            router.push('/projects')
+        }
+
+        return {
+            store,
+            projects: computed(() => store.state.project.projects),
+            projectName,
+            saveProject
         }
     },
 
-    methods: {
-        saveProject() {
-            if (this.id) {
-                this.store.dispatch('updateProject', { id: this.id, name: this.projectName })
-            } else {
-                this.store.dispatch("addProject", this.projectName);
-            }
-            this.projectName = "";
-            this.$router.push('/projects')
-        },
-
-    },
 });
 </script>
   
