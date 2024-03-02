@@ -1,7 +1,8 @@
 import ProjectInterface from "./ProjectInterface";
 
 export default interface TaskInterface {
-  durationInSeconds: number;
+  id: string;
   description: string;
   project: ProjectInterface;
+  durationInSeconds: number;
 }

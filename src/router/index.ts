@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 
 import App from "@/views/Home.vue";
-import TimeTracker from "@/views/TimeTracker.vue";
+import TimeTracker from "@/views/Tasks/TimeTracker.vue";
 import IndexProject from "@/views/Projects/Index.vue";
 import ListProject from "@/views/Projects/List.vue";
 import FormProject from "@/views/Projects/Form.vue";
